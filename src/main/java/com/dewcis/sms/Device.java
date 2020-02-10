@@ -23,7 +23,7 @@ public class Device {
 
 		httpClient client = new httpClient();
 		String userFile = "/auth/login";
-       	String uri = url + userFile;
+       	String uri = url + userFile; 
 		String result = client.getTokens(uri, jLogin.toString());
 		JSONObject json = new JSONObject(result);
 		String token = json.getString("token");
@@ -32,6 +32,9 @@ public class Device {
 		String refreshToken = log.rfToken(json.getString("refreshToken"));
 		if(refreshToken.length()!=0){
 			System.out.println("Tokens have expired" + refreshToken.length());
+			for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 			// Transform reponse to JSon Object
 			json = new JSONObject(result);
 			token = json.getString("token");
@@ -42,6 +45,9 @@ public class Device {
 			log.subscr(token);
 		}else if (refreshToken.length()==0) {
 			System.out.println("Tokens have not yet expired " + refreshToken.length());
+			for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 			log.bulkSms(token);
 			log.sendSms(token);
 			log.subscr(token);
@@ -67,6 +73,9 @@ public class Device {
 
 		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
 		System.out.println("Response timestamp : " + timeStamp);
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -103,7 +112,10 @@ public class Device {
 		jsubscr.put("requestParam", jdata);
 
 		System.out.println("Response packet json values : " + jsubscr.toString());
-
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
+			
 	    String userFile = "/public/SDP/activate";
 	    String uri = baseUrl + userFile;
 	    httpClient get = new httpClient();
@@ -118,6 +130,9 @@ public class Device {
 
 		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
 		System.out.println("Response timestamp : " + timeStamp);
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -150,6 +165,9 @@ public class Device {
 		junsubscr.put("requestParam", jdata);
 
 		System.out.println("Response packet json values : " + junsubscr.toString());
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 	    String userFile = "/public/SDP/deactivate";
 	    String uri = baseUrl + userFile;
@@ -195,6 +213,9 @@ public class Device {
 
 		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
 		System.out.println("Response timestamp : " + timeStamp);
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "LinkId");
@@ -236,6 +257,9 @@ public class Device {
 		jsendsms.put("requestParam", jdata);
 
 		System.out.println("Response packet json values : " + jsendsms.toString());
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 
 	    String userFile = "public/SDP/sendSMSRequest";
@@ -252,6 +276,9 @@ public class Device {
 
 		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
 		System.out.println("Response timestamp : " + timeStamp);
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -289,6 +316,9 @@ public class Device {
 		jsendsms.put("additionalData", jadditionalDataSet);
 
 		System.out.println("Response packet json values : " + jsendsms.toString());
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 	    // String userFile = "/public/SDP/deactivate";
 	    // String uri = baseUrl + userFile;

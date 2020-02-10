@@ -99,6 +99,9 @@ public String getTokens(String bURL, String sData) {
 		if ((responseCode = response.code()) == 200) {
 
 		    System.out.println("Response body : " + result);
+		    for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 	    	// Transform reponse to JSon Object
            JSONObject json = new JSONObject(result);
            JOptionPane.showMessageDialog(null, json.getString("msg"));
@@ -140,8 +143,14 @@ public String getRefreshTokens(String bURL, String refreshToken) {
 		if ((responseCode = response.code()) == 200) {
 
 		    System.out.println("Response body Token refresh : " + result);
+		    for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 		    if(result.length()!=0){
 				System.out.println("Tokens have expired");
+				for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 		    	// Transform reponse to JSon Object
 	           JSONObject json = new JSONObject(result);
 				result = json.getString("token");
@@ -185,6 +194,9 @@ public String post(String bURL, String token, String jbody) {
 		if ((responseCode = response.code()) == 200) {
 
 		    System.out.println("Response body bulksms : " + result);
+		   for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 //		    if(result.isEmpty()){
 //		    	// Transform reponse to JSon Object
 //	           JSONObject json = new JSONObject(result);
