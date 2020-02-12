@@ -206,7 +206,7 @@ public String post(String bURL, String token, String jbody) {
 		}else if((responseCode = response.code()) != 200) {
 			// JSONObject jObject = new JSONObject(result);
 			// JOptionPane.showMessageDialog(null, jObject.getString("msg"));
-			System.out.println("IO Error Response body bulksms : " + result);
+			System.out.println("IO Error Response body Post : " + result);
 		}
 
 

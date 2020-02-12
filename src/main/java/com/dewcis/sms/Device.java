@@ -68,14 +68,15 @@ public class Device {
 
    }
 
+   //get current timestamp
+	public String timeStamp() {
+	    String results = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
+	    return results;
+
+   }
+
    // user subscription 
 	public String subscr(String token) {
-
-		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
-		System.out.println("Response timestamp : " + timeStamp);
-		for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -106,7 +107,7 @@ public class Device {
 
 		JSONObject jsubscr = new JSONObject();
 		jsubscr.put("requestId", "17");
-		jsubscr.put("requestTimeStamp", timeStamp);
+		jsubscr.put("requestTimeStamp", timeStamp());
 		jsubscr.put("channel", "SMS");
 		jsubscr.put("operation", "ACTIVATE");
 		jsubscr.put("requestParam", jdata);
@@ -127,12 +128,6 @@ public class Device {
 
    // user De-activation 
 	public String unsubscr(String token) {
-
-		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
-		System.out.println("Response timestamp : " + timeStamp);
-		for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -158,7 +153,7 @@ public class Device {
 
 		JSONObject junsubscr = new JSONObject();
 		junsubscr.put("requestId", "17");
-		junsubscr.put("requestTimeStamp", timeStamp);
+		junsubscr.put("requestTimeStamp", timeStamp());
 		junsubscr.put("channel", "3");
 		junsubscr.put("sourceAddress", "224.223.10.27");
 		junsubscr.put("operation", "DEACTIVATE");
@@ -211,12 +206,6 @@ public class Device {
    // user one sms
 	public String sendSms(String token) {
 
-		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
-		System.out.println("Response timestamp : " + timeStamp);
-		for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
-
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "LinkId");
 		jdatav1.put("value", "00010310189519161781865526");
@@ -250,7 +239,7 @@ public class Device {
 
 		JSONObject jsendsms = new JSONObject();
 		jsendsms.put("requestId", "17");
-		jsendsms.put("requestTimeStamp", timeStamp);
+		jsendsms.put("requestTimeStamp", timeStamp());
 		jsendsms.put("channel", "3");
 		jsendsms.put("sourceAddress", "224.223.10.27");
 		jsendsms.put("operation", "SendSMS");
@@ -273,12 +262,6 @@ public class Device {
 
    // CP Notification 
 	public void notification(String token) {
-
-		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
-		System.out.println("Response timestamp : " + timeStamp);
-		for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
@@ -310,7 +293,7 @@ public class Device {
 
 		JSONObject jsendsms = new JSONObject();
 		jsendsms.put("requestId", "17223344555");
-		jsendsms.put("requestTimeStamp", timeStamp);
+		jsendsms.put("requestTimeStamp", timeStamp());
 		jsendsms.put("operation", "CP_NOTIFICATION");
 		jsendsms.put("requestParam", jdata);
 		jsendsms.put("additionalData", jadditionalDataSet);
