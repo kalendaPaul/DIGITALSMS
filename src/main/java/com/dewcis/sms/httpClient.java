@@ -98,7 +98,7 @@ public String getTokens(String bURL, String sData) {
 
 		if ((responseCode = response.code()) == 200) {
 
-		    System.out.println("Response body : " + result);
+		    System.out.println("Response body  after getting Tokens: " + result);
 		    for(int x=1; x<=6; x++){
 				System.out.println("               ");
 			}
@@ -111,7 +111,7 @@ public String getTokens(String bURL, String sData) {
 
 		}else if((responseCode = response.code()) != 200) {
 			JSONObject jObject = new JSONObject(result);
-			JOptionPane.showMessageDialog(null, jObject.getString("msg"));
+			// JOptionPane.showMessageDialog(null, jObject.getString("msg"));
 			System.out.println("IO Error : " + jObject);
 		}
 
@@ -142,10 +142,10 @@ public String getRefreshTokens(String bURL, String refreshToken) {
 
 		if ((responseCode = response.code()) == 200) {
 
-		    System.out.println("Response body Token refresh : " + result);
-		    for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
+		 //    System.out.println("Response body Token refresh : " + result);
+		 //    for(int x=1; x<=6; x++){
+			// 	System.out.println("               ");
+			// }
 		    if(result.length()!=0){
 				System.out.println("Tokens have expired");
 				for(int x=1; x<=6; x++){
@@ -193,7 +193,7 @@ public String post(String bURL, String token, String jbody) {
 
 		if ((responseCode = response.code()) == 200) {
 
-		    System.out.println("Response body bulksms : " + result);
+		    System.out.println("Response body json values are : " + result);
 		   for(int x=1; x<=6; x++){
 				System.out.println("               ");
 			}
@@ -206,7 +206,11 @@ public String post(String bURL, String token, String jbody) {
 		}else if((responseCode = response.code()) != 200) {
 			// JSONObject jObject = new JSONObject(result);
 			// JOptionPane.showMessageDialog(null, jObject.getString("msg"));
+			for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 			System.out.println("IO Error Response body Post : " + result);
+
 		}
 
 

@@ -10,12 +10,13 @@ import org.json.JSONObject;
 public class Device {
 	Logger log = Logger.getLogger(Device.class.getName());
 	String baseUrl= "https://dtsvc.safaricom.com:8480/api";
+	String offerCode = "001010400219";
 
 	//Getting sessionid for the logged in user
 	public static void main(String[] args) {
 		String url = "https://dtsvc.safaricom.com:8480/api";
 		String username = "Etiqet_apiuser";
-		String password = "Admin@123";
+		String password = "M@endele02020";
 
 		JSONObject jLogin = new JSONObject();
 		jLogin.put("username", username);
@@ -38,21 +39,16 @@ public class Device {
 			// Transform reponse to JSon Object
 			json = new JSONObject(result);
 			token = json.getString("token");
-			log.bulkSms(token);
-			log.sendSms(token);
-			log.subscr(token);
-			log.unsubscr(token);
-			log.subscr(token);
+			// log.bulkSms(token);
+			// // log.sendSms(token);
+			// log.subscr(token);
+			// log.unsubscr(token);
 		}else if (refreshToken.length()==0) {
-			System.out.println("Tokens have not yet expired " + refreshToken.length());
-			for(int x=1; x<=6; x++){
-				System.out.println("               ");
-			}
-			log.bulkSms(token);
+			// log.bulkSms(token);
 			log.sendSms(token);
-			log.subscr(token);
-			log.unsubscr(token);
-			log.subscr(token);
+			// log.subscr(token);
+			// log.unsubscr(token);
+		
 		}
 
 	}
@@ -80,11 +76,11 @@ public class Device {
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
-		jdatav1.put("value", "350032100559");
+		jdatav1.put("value", offerCode);
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
-		jdatav2.put("value", "795421629");
+		jdatav2.put("value", "748249894");
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "Language");
@@ -109,10 +105,11 @@ public class Device {
 		jsubscr.put("requestId", "17");
 		jsubscr.put("requestTimeStamp", timeStamp());
 		jsubscr.put("channel", "SMS");
+		// jsubscr.put("sourceAddress", "62.24.122.22");
 		jsubscr.put("operation", "ACTIVATE");
 		jsubscr.put("requestParam", jdata);
 
-		System.out.println("Response packet json values : " + jsubscr.toString());
+		System.out.println("Request body in json, values are : " + jsubscr.toString());
 		for(int x=1; x<=6; x++){
 				System.out.println("               ");
 			}
@@ -131,11 +128,11 @@ public class Device {
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
-		jdatav1.put("value", "1001");
+		jdatav1.put("value", offerCode);
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
-		jdatav2.put("value", "254720123456");
+		jdatav2.put("value", "254711572013");
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "CpId");
@@ -180,24 +177,29 @@ public class Device {
 		JSONObject jdata = new JSONObject();
 		jdata.put("userName", "Etiqet_apiuser");
 		jdata.put("channel", "sms");
-		jdata.put("packageId", "4391");
-		jdata.put("oa", "TestSender");
-		jdata.put("msisdn", "254758934575,254795421629");
+		jdata.put("packageId", "4775");
+		jdata.put("oa", "SDPTest");
+		jdata.put("msisdn", "254748249894");
 		jdata.put("message", "hello testing online promo nov 1");
 		jdata.put("uniqueId", "2500688298721");
-		jdata.put("actionResponseURL", "http://72.1.51.93:8485/BulkDLR");
+		jdata.put("actionResponseURL", "https://posthere.io/c59f-4786-86ac");
 
 		jdataset.put(jdata);
 
 		JSONObject jbulksms = new JSONObject();
-		jbulksms.put("timeStamp", "15567981561235");
+		jbulksms.put("timeStamp", timeStamp());
 		jbulksms.put("dataSet", jdataset);
 
+		System.out.println("Bulksms Request body fin json, values are : " + jbulksms.toString());
+		for(int x=1; x<=6; x++){
+				System.out.println("               ");
+			}
 
 	    String userFile = "/public/CMS/bulksms";
 	    String uri = baseUrl + userFile;
 	    httpClient get = new httpClient();
 	    String results = get.post(uri, token, jbulksms.toString());
+
 
 	    return results;
 
@@ -212,7 +214,7 @@ public class Device {
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
-		jdatav2.put("value", "254795421629");
+		jdatav2.put("value", "254748249894");
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "Content");
@@ -220,7 +222,7 @@ public class Device {
 
 		JSONObject jdatav4 = new JSONObject();
 		jdatav4.put("name", "OfferCode");
-		jdatav4.put("value", "1003");
+		jdatav4.put("value", offerCode);
 
 		JSONObject jdatav5 = new JSONObject();
 		jdatav5.put("name", "CpId");
@@ -241,17 +243,17 @@ public class Device {
 		jsendsms.put("requestId", "17");
 		jsendsms.put("requestTimeStamp", timeStamp());
 		jsendsms.put("channel", "3");
-		jsendsms.put("sourceAddress", "224.223.10.27");
+		jsendsms.put("sourceAddress", "62.24.122.22");
 		jsendsms.put("operation", "SendSMS");
 		jsendsms.put("requestParam", jdata);
 
-		System.out.println("Response packet json values : " + jsendsms.toString());
+		System.out.println("Response packet json send following values : " + jsendsms.toString());
 		for(int x=1; x<=6; x++){
 				System.out.println("               ");
 			}
 
 
-	    String userFile = "public/SDP/sendSMSRequest";
+	    String userFile = "/public/SDP/sendSMSRequest";
 	    String uri = baseUrl + userFile;
 	    httpClient get = new httpClient();
 	    String results = get.post(uri, token, jsendsms.toString());
@@ -265,11 +267,11 @@ public class Device {
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "OfferCode");
-		jdatav1.put("value", "1001");
+		jdatav1.put("value", offerCode);
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
-		jdatav2.put("value", "254720123456");
+		jdatav2.put("value", "254711572013");
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "Command");
