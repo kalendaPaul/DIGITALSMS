@@ -1,8 +1,11 @@
 package com.dewcis.sms;
 
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
+
+import java.net.InetAddress;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,8 +14,7 @@ public class Device {
 	Logger log = Logger.getLogger(Device.class.getName());
 	String baseUrl= "https://dtsvc.safaricom.com:8480/api";
 	String offerCode = "001010400219";
-
-	//Getting sessionid for the logged in user
+	
 	public static void main(String[] args) {
 		String url = "https://dtsvc.safaricom.com:8480/api";
 		String username = "Etiqet_apiuser";
@@ -44,8 +46,8 @@ public class Device {
 			// log.subscr(token);
 			// log.unsubscr(token);
 		}else if (refreshToken.length()==0) {
-			// log.bulkSms(token);
-			log.sendSms(token);
+			log.bulkSms(token);
+			// log.sendSms(token);
 			// log.subscr(token);
 			// log.unsubscr(token);
 		
@@ -69,6 +71,22 @@ public class Device {
 	    String results = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //get current timestamp and its format
 	    return results;
 
+   }
+
+   //get system ip address
+   public String ipAddress(){
+   		// Returns the instance of InetAddress containing 
+   		// local host name and address 
+	   InetAddress localhost = null;
+	   try {
+		   localhost = InetAddress.getLocalHost();
+	   } catch (UnknownHostException e) {
+		   e.printStackTrace();
+		   System.out.println("IO Error UnknownHostException : " + e);
+	   }
+	   String ip = (localhost.getHostAddress()).trim();
+
+        return ip;
    }
 
    // user subscription 
@@ -105,7 +123,7 @@ public class Device {
 		jsubscr.put("requestId", "17");
 		jsubscr.put("requestTimeStamp", timeStamp());
 		jsubscr.put("channel", "SMS");
-		// jsubscr.put("sourceAddress", "62.24.122.22");
+		jsubscr.put("sourceAddress", ipAddress());
 		jsubscr.put("operation", "ACTIVATE");
 		jsubscr.put("requestParam", jdata);
 
@@ -132,7 +150,7 @@ public class Device {
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
-		jdatav2.put("value", "254711572013");
+		jdatav2.put("value", "254748249894");
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "CpId");
@@ -152,7 +170,7 @@ public class Device {
 		junsubscr.put("requestId", "17");
 		junsubscr.put("requestTimeStamp", timeStamp());
 		junsubscr.put("channel", "3");
-		junsubscr.put("sourceAddress", "224.223.10.27");
+		junsubscr.put("sourceAddress", ipAddress());
 		junsubscr.put("operation", "DEACTIVATE");
 		junsubscr.put("requestParam", jdata);
 
@@ -175,11 +193,11 @@ public class Device {
 
 		JSONArray jdataset = new JSONArray();
 		JSONObject jdata = new JSONObject();
-		jdata.put("userName", "Etiqet_apiuser");
+		jdata.put("userName", "Etiqet");
 		jdata.put("channel", "sms");
 		jdata.put("packageId", "4775");
 		jdata.put("oa", "SDPTest");
-		jdata.put("msisdn", "254748249894");
+		jdata.put("msisdn", "254748249894,254715668934");
 		jdata.put("message", "hello testing online promo nov 1");
 		jdata.put("uniqueId", "2500688298721");
 		jdata.put("actionResponseURL", "https://posthere.io/c59f-4786-86ac");
@@ -243,7 +261,7 @@ public class Device {
 		jsendsms.put("requestId", "17");
 		jsendsms.put("requestTimeStamp", timeStamp());
 		jsendsms.put("channel", "3");
-		jsendsms.put("sourceAddress", "62.24.122.22");
+		jsendsms.put("sourceAddress", ipAddress());
 		jsendsms.put("operation", "SendSMS");
 		jsendsms.put("requestParam", jdata);
 
