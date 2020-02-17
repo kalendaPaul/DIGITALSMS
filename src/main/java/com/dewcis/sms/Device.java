@@ -13,6 +13,7 @@ import org.json.JSONObject;
 public class Device {
 	Logger log = Logger.getLogger(Device.class.getName());
 	String baseUrl= "https://dtsvc.safaricom.com:8480/api";
+	String responsURL = "https://demo.dewcis.com/sms/sms_response";
 	String offerCode = "001010400219";
 	
 	public static void main(String[] args) {
@@ -200,7 +201,7 @@ public class Device {
 		jdata.put("msisdn", "254748249894,254715668934");
 		jdata.put("message", "hello testing online promo nov 1");
 		jdata.put("uniqueId", "2500688298721");
-		jdata.put("actionResponseURL", "https://posthere.io/c59f-4786-86ac");
+		jdata.put("actionResponseURL", responsURL);
 
 		jdataset.put(jdata);
 
