@@ -73,10 +73,10 @@ public class loginDesk implements ActionListener {
 		loginPanel.add(clearStatus);
 		loginPanel.add(loginStatus);
 		
-		frame = new JFrame("Baraza Project");
+		frame = new JFrame("SMS Project");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(imagePanel, BorderLayout.CENTER);
-		frame.setSize(1000, 800);
+		frame.setSize(800, 600);
 		frame.setVisible(true);
 	}
 	

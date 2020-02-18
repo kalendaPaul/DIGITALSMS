@@ -26,10 +26,6 @@ import org.json.JSONObject;
 
 public class httpClient {
 	Logger log = Logger.getLogger(httpClient.class.getName());
-
-	// String result = null;
-	// String token = null;
-	// String refreshToken = null;
 	OkHttpClient client = null;
 	
 
@@ -169,8 +165,9 @@ public String getRefreshTokens(String bURL, String refreshToken) {
    return result;
 }
 
-public String post(String bURL, String token, String jbody) {
+public String post(String bURL, JSONObject loginResults, String jbody) {
 	client = getUnsafeOkHttpClient();
+	String token = loginResults.getString("token");
 	String result = null;
 	try {
 
