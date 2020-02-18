@@ -51,7 +51,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib</classpathPrefix>
-							<mainClass>com.dewcis.sms.Device</mainClass>
+							<mainClass>com.dewcis.sms.loginDesk</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Class-Path>lib/</Class-Path>

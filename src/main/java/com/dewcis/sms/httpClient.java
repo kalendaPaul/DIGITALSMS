@@ -3,7 +3,7 @@ package com.dewcis.sms;
 import java.util.logging.Logger;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-
+import javax.swing.JPanel;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -11,6 +11,7 @@ import okhttp3.Response;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 import okhttp3.Call;
+
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -99,20 +100,18 @@ public String getTokens(String bURL, String sData) {
 		if ((responseCode = response.code()) == 200) {
 
 		    System.out.println("Response body  after getting Tokens: " + result);
-		    for(int x=1; x<=6; x++){
+		    for(int x=1; x<=3; x++){
 				System.out.println("               ");
 			}
-	    	// Transform reponse to JSon Object
-           JSONObject json = new JSONObject(result);
-           JOptionPane.showMessageDialog(null, json.getString("msg"));
            // Use the JSon Object to get token value
            // token = json.getString("token");
            // refreshToken = json.getString("refreshToken");
 
 		}else if((responseCode = response.code()) != 200) {
 			JSONObject jObject = new JSONObject(result);
-			// JOptionPane.showMessageDialog(null, jObject.getString("msg"));
+			JOptionPane.showMessageDialog(new JPanel(), jObject.getString("message"), "Error", JOptionPane.ERROR_MESSAGE);
 			System.out.println("IO Error : " + jObject);
+			result =  null;
 		}
 
 

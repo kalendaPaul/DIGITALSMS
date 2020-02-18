@@ -1,5 +1,7 @@
 com\dewcis\utils\Bio.class
 com\dewcis\sms\Device.class
+com\dewcis\sms\loginDesk.class
+com\dewcis\sms\mainDesk.class
 com\dewcis\sms\httpClient$1.class
 com\dewcis\swing\BImagePanel.class
 com\dewcis\sms\httpClient$2.class
