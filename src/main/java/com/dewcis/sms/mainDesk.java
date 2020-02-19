@@ -61,6 +61,7 @@ public class mainDesk extends JPanel implements  ActionListener{
 	List<JTextField> txfs;
 	List<JComboBox> cmbs;
 	List<String> lbls;
+	List<JLabel> msg;
 	
 	Map<String, String> userFields;
 	
@@ -95,12 +96,10 @@ public class mainDesk extends JPanel implements  ActionListener{
         
         searchPanel = new JPanel(null);
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Subscription Fields/ Ondemand Subscription"));
-        searchPanel.setBounds(5, 100, 800, 150);
+        searchPanel.setBounds(5, 100, 500, 100);
         mainPanel.add(searchPanel);
         
         addField(searchPanel, "OfferCode", "Offer Code", 10, 20, 120, 20, 300);
-
-        // addCombox("Event names ", eventCodeName,10, 110, 120, 20, 300);
         
         // Butons panel
         buttonPanel = new JPanel(new GridLayout(0, 4));
@@ -111,10 +110,18 @@ public class mainDesk extends JPanel implements  ActionListener{
 		addButton(buttonPanel, "Bulk SMS",  450, 5, 70, 15, true);
 
 		ptbtnPanel = new JPanel(new BorderLayout());
-		addPanel(mainPanel, ptbtnPanel, "",10, 500, 600, 30);
+		addPanel(mainPanel, ptbtnPanel, "",10, 250, 600, 30);
 		ptbtnPanel.add(buttonPanel, BorderLayout.PAGE_END);
+
+		// Status panel
+		msg = new ArrayList<JLabel>();
+		statusPanel = new JPanel(null);
+		statusPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Status / Message "));
+		statusPanel.setBounds(5, 300, 600, 100);
+		mainPanel.add(statusPanel);
+
+		addMessage("Message", 10, 10, 120, 20, 700);
         
-        // tabbedPane.addTab("Verify User / Search logs", mainPanel);
         
         super.add(mainPanel, BorderLayout.CENTER);
             
@@ -124,6 +131,17 @@ public class mainDesk extends JPanel implements  ActionListener{
 		n2Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), pnTitle));
 		n2Panel.setBounds(x, y, w, h);
 		n1Panel.add(n2Panel);
+	}
+
+	public void addMessage(String fieldTitle, int x, int y, int w, int h, int dw) {
+		JLabel lbTitle = new JLabel(fieldTitle + " : ");
+		lbTitle.setBounds(x, y, w, h);
+		statusPanel.add(lbTitle);
+		
+		JLabel lbValue = new JLabel();
+		lbValue.setBounds(x + w + 10, y, dw, h);
+		statusPanel.add(lbValue);
+		msg.add(lbValue);
 	}
 
 	public void addField(JPanel mypanel, String fieldKey, String fieldTitle, int x, int y, int w, int h, int dw) {
@@ -171,19 +189,26 @@ public class mainDesk extends JPanel implements  ActionListener{
 	public void actionPerformed(ActionEvent ev) {
 
 		if(ev.getActionCommand().equals("Subscription")) {
-			logConn.subscr(loginResults, userFields);
+			addTxtLbs();
+			String feedback = logConn.subscr(loginResults, userFields);
+			msg.get(0).setText(feedback);
 		}
 
 		if(ev.getActionCommand().equals("Unsubscribe")) {
-			logConn.unsubscr(loginResults, userFields);
+			addTxtLbs();
+			String feedback = logConn.unsubscr(loginResults, userFields);
+			msg.get(0).setText(feedback);
 		}
 
 		if(ev.getActionCommand().equals("Send SMS")) {
-			logConn.sendSms(loginResults, userFields);
+			addTxtLbs();
+			String feedback = logConn.sendSms(loginResults, userFields);
+			msg.get(0).setText(feedback);
 		}
 
 		if(ev.getActionCommand().equals("Bulk SMS")) {
-			logConn.bulkSms(loginResults, userFields);
+			String feedback = logConn.bulkSms(loginResults, userFields);
+			msg.get(0).setText(feedback);
 		}
 
 	}
