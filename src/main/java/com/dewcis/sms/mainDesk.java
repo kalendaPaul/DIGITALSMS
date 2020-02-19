@@ -96,31 +96,34 @@ public class mainDesk extends JPanel implements  ActionListener{
         
         searchPanel = new JPanel(null);
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Subscription Fields/ Ondemand Subscription"));
-        searchPanel.setBounds(5, 100, 500, 100);
+        searchPanel.setBounds(5, 100, 500, 110);
         mainPanel.add(searchPanel);
         
         addField(searchPanel, "OfferCode", "Offer Code", 10, 20, 120, 20, 300);
+        addField(searchPanel, "LinkId", "Link ID", 10, 50, 120, 20, 300);
+        addField(searchPanel, "CpId", "CP ID", 10, 80, 120, 20, 300);
         
         // Butons panel
-        buttonPanel = new JPanel(new GridLayout(0, 4));
+        buttonPanel = new JPanel(new GridLayout(0, 5));
         
         addButton(buttonPanel, "Subscription",  150, 5, 70, 15, true);
 		addButton(buttonPanel, "Unsubscribe",  450, 5, 70, 15, true);
 		addButton(buttonPanel, "Send SMS",  450, 5, 70, 15, true);
 		addButton(buttonPanel, "Bulk SMS",  450, 5, 70, 15, true);
+		addButton(buttonPanel, "Refresh Token",  450, 5, 70, 15, true);
 
 		ptbtnPanel = new JPanel(new BorderLayout());
-		addPanel(mainPanel, ptbtnPanel, "",10, 250, 600, 30);
+		addPanel(mainPanel, ptbtnPanel, "",10, 250, 700, 30);
 		ptbtnPanel.add(buttonPanel, BorderLayout.PAGE_END);
 
 		// Status panel
 		msg = new ArrayList<JLabel>();
 		statusPanel = new JPanel(null);
 		statusPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Status / Message "));
-		statusPanel.setBounds(5, 300, 600, 100);
+		statusPanel.setBounds(5, 300, 700, 100);
 		mainPanel.add(statusPanel);
 
-		addMessage("Message", 10, 10, 120, 20, 700);
+		addMessage("Message", 10, 10, 120, 20, 500);
         
         
         super.add(mainPanel, BorderLayout.CENTER);
@@ -191,24 +194,58 @@ public class mainDesk extends JPanel implements  ActionListener{
 		if(ev.getActionCommand().equals("Subscription")) {
 			addTxtLbs();
 			String feedback = logConn.subscr(loginResults, userFields);
-			msg.get(0).setText(feedback);
+			JSONObject jResults = new JSONObject(feedback);
+			if (jResults.has("message")) {
+				msg.get(0).setText(jResults.getString("message"));
+			}else{
+				msg.get(0).setText(jResults.get("responseParam").toString());
+			}
+			
 		}
 
 		if(ev.getActionCommand().equals("Unsubscribe")) {
 			addTxtLbs();
 			String feedback = logConn.unsubscr(loginResults, userFields);
-			msg.get(0).setText(feedback);
+			JSONObject jResults = new JSONObject(feedback);
+			if (jResults.has("message")) {
+				msg.get(0).setText(jResults.getString("message"));
+			}else{
+				msg.get(0).setText(jResults.get("responseParam").toString());
+			}
 		}
 
 		if(ev.getActionCommand().equals("Send SMS")) {
 			addTxtLbs();
 			String feedback = logConn.sendSms(loginResults, userFields);
-			msg.get(0).setText(feedback);
+			JSONObject jResults = new JSONObject(feedback);
+			if (jResults.has("message")) {
+				msg.get(0).setText(jResults.getString("message"));
+			}else{
+				msg.get(0).setText(jResults.get("responseParam").toString());
+			}
 		}
 
 		if(ev.getActionCommand().equals("Bulk SMS")) {
 			String feedback = logConn.bulkSms(loginResults, userFields);
-			msg.get(0).setText(feedback);
+			JSONObject jResults = new JSONObject(feedback);
+			if (jResults.has("message")) {
+				msg.get(0).setText(jResults.getString("message"));
+			}else{
+				msg.get(0).setText(feedback);
+			}
+		}
+
+		if(ev.getActionCommand().equals("Refresh Token")) {
+			String refreshToken = logConn.rfToken(loginResults.getString("refreshToken"));
+			if(refreshToken.length()!=0){
+				loginResults.remove("token");
+				JSONObject jResults = new JSONObject(refreshToken);
+				loginResults.put("token", jResults.getString("token"));
+				msg.get(0).setText("Token has been Refreshed");
+			}else if (refreshToken.length()==0) {
+				msg.get(0).setText("Token has not yet Expered");
+			}
+			
 		}
 
 	}

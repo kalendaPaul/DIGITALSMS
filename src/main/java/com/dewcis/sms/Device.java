@@ -135,7 +135,7 @@ public class Device {
 
 		JSONObject jdatav4 = new JSONObject();
 		jdatav4.put("name", "CpId");
-		jdatav4.put("value", "104");
+		jdatav4.put("value", userFields.get("CpId"));
 
 
 		JSONArray jdataset = new JSONArray();
@@ -183,7 +183,7 @@ public class Device {
 
 		JSONObject jdatav3 = new JSONObject();
 		jdatav3.put("name", "CpId");
-		jdatav3.put("value", "104");
+		jdatav3.put("value", userFields.get("CpId"));
 
 
 		JSONArray jdataset = new JSONArray();
@@ -257,7 +257,7 @@ public class Device {
 
 		JSONObject jdatav1 = new JSONObject();
 		jdatav1.put("name", "LinkId");
-		jdatav1.put("value", "00010310189519161781865526");
+		jdatav1.put("value", userFields.get("LinkId"));
 
 		JSONObject jdatav2 = new JSONObject();
 		jdatav2.put("name", "Msisdn");
@@ -273,7 +273,7 @@ public class Device {
 
 		JSONObject jdatav5 = new JSONObject();
 		jdatav5.put("name", "CpId");
-		jdatav5.put("value", "104");
+		jdatav5.put("value", userFields.get("CpId"));
 
 		JSONArray jdataset = new JSONArray();
 		jdataset.put(jdatav1);
