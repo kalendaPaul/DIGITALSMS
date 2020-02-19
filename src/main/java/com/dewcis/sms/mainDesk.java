@@ -239,8 +239,10 @@ public class mainDesk extends JPanel implements  ActionListener{
 			String refreshToken = logConn.rfToken(loginResults.getString("refreshToken"));
 			if(refreshToken.length()!=0){
 				loginResults.remove("token");
+				System.out.println("BASE i Token Removed : " + loginResults.toString());
 				JSONObject jResults = new JSONObject(refreshToken);
 				loginResults.put("token", jResults.getString("token"));
+				System.out.println("BASE i Token Added : " + loginResults.toString());
 				msg.get(0).setText("Token has been Refreshed");
 			}else if (refreshToken.length()==0) {
 				msg.get(0).setText("Token has not yet Expered");
